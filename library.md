@@ -1,4 +1,4 @@
-## 2182 Devices in library
+## 2187 Devices in library
 
 This file is auto generated, do not modify
 
@@ -219,11 +219,14 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |American Power Conversion                       |Back-UPS NS 1250 LCD                                                                          |2× UB1280                 |                                   |                                      |
 |American Power Conversion                       |Back-UPS RS 900MI                                                                             |Rechargeable              |                                   |                                      |
 |American Power Conversion                       |Back-UPS XS 1500M                                                                             |Rechargeable              |                                   |                                      |
+|American Power Conversion                       |Back-UPS XS 800CI                                                                             |RBCBX800-BD1              |                                   |                                      |
+|American Power Conversion                       |Back-UPS XS 950U                                                                              |RBCBX950-BD1              |                                   |                                      |
 |AMV FritzBox                                    |FRITZ!DECT 302                                                                                |3× AA                     |                                   |                                      |
 |AMV FritzBox                                    |FRITZ!DECT 350                                                                                |2× AAA                    |                                   |                                      |
 |AMV FritzBox                                    |FRITZ!DECT 440                                                                                |2× AAA                    |                                   |                                      |
 |APC                                             |Back-UPS RS 900G                                                                              |APCRBC123                 |                                   |879.L4 .I USB FW:L4                   |
 |APC                                             |Back-UPS XS 1500M                                                                             |Rechargeable              |                                   |                                      |
+|APC                                             |Smart-UPS 1500                                                                                |APCRBC164-LI              |                                   |                                      |
 |APC                                             |SRV 2K I -AR                                                                                  |APCRBCV204                |                                   |                                      |
 |ApolloAutomation                                |PLT-1B                                                                                        |18650                     |                                   |                                      |
 |Apple                                           |Apple Watch\*                                                                                 |Rechargeable              |                                   |                                      |
@@ -570,6 +573,7 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |eQ-3                                            |HM-Sec-SD-2                                                                                   |Irreplaceable             |                                   |                                      |
 |eQ-3                                            |HM-Sec-Sir-WM                                                                                 |2× LR14                   |                                   |                                      |
 |eQ-3                                            |HM-Sec-TiS                                                                                    |CR2032                    |                                   |                                      |
+|eQ-3                                            |HM-Sec-WDS-2                                                                                  |2× AA                     |                                   |                                      |
 |eQ-3                                            |HM-Sec-Win                                                                                    |HM-Sec-Win-BaP            |                                   |                                      |
 |eQ-3                                            |HM-Sen-DB-PCB                                                                                 |2× AAA                    |                                   |                                      |
 |eQ-3                                            |HM-Sen-LI-O                                                                                   |3× AA                     |                                   |                                      |
@@ -577,6 +581,7 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |eQ-3                                            |HM-Sen-MDIR-O-2                                                                               |3× AA                     |                                   |                                      |
 |eQ-3                                            |HM-Sen-MDIR-SM                                                                                |3× AA                     |                                   |                                      |
 |eQ-3                                            |HM-Sen-MDIR-WM55                                                                              |2× AAA                    |                                   |                                      |
+|eQ-3                                            |HM-Sen-Wa-Od                                                                                  |3× AA                     |                                   |                                      |
 |eQ-3                                            |HM-SwI-3-FM                                                                                   |CR2032                    |                                   |                                      |
 |eQ-3                                            |HM-TC-IT-WM-W-EU                                                                              |2× AAA                    |                                   |                                      |
 |eQ-3                                            |HM-WDS10-TH-O                                                                                 |2× AA                     |                                   |                                      |
