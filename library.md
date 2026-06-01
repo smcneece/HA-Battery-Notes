@@ -1,4 +1,4 @@
-## 2187 Devices in library
+## 2191 Devices in library
 
 This file is auto generated, do not modify
 
@@ -38,6 +38,7 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |_TZ3000_abci1hiu                                |TS0044                                                                                        |A23                       |                                   |                                      |
 |_TZ3000_abrsvsou                                |TS004F                                                                                        |CR2032                    |                                   |                                      |
 |_TZ3000_amis43tj                                |TS0207                                                                                        |CR2450                    |                                   |                                      |
+|_TZ3000_an5rjiwd                                |TS0041                                                                                        |CR2032                    |                                   |                                      |
 |_TZ3000_au1rjicn                                |TS0203                                                                                        |CR2032                    |                                   |                                      |
 |_TZ3000_bgsigers                                |TS0201                                                                                        |2× AAA                    |                                   |                                      |
 |_TZ3000_bguser20                                |TS0201                                                                                        |2× AAA                    |                                   |                                      |
@@ -1315,6 +1316,7 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |Popp & Co                                       |004407                                                                                        |LR14250                   |                                   |                                      |
 |Popp & Co                                       |POPE700168                                                                                    |2× AAA                    |                                   |                                      |
 |Powermax                                        |MCT-426                                                                                       |CR123A                    |                                   |                                      |
+|PushOK Hardware                                 |POK002                                                                                        |2× AAA                    |                                   |                                      |
 |PushOk Hardware                                 |POK005                                                                                        |CR14250                   |                                   |                                      |
 |PushOK Hardware                                 |POK007                                                                                        |2× AAA                    |                                   |v2                                    |
 |PushOk Hardware                                 |POK009                                                                                        |CR2032                    |                                   |v2                                    |
@@ -1328,6 +1330,7 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |Remotec                                         |BW8510                                                                                        |2× AAA                    |                                   |                                      |
 |Remsol                                          |ismartgateLITE                                                                                |2× N                      |                                   |                                      |
 |Remsol                                          |ismartgateMINI                                                                                |2× LR1                    |                                   |                                      |
+|Reolink                                         |Argus 3 Ultra                                                                                 |Rechargeable              |                                   |BIPC_560MIX16M35C10G8MP               |
 |reolink                                         |Argus Eco Ultra                                                                               |Rechargeable              |                                   |BIPC_560MIX16M35B238MP                |
 |Reolink                                         |Reolink Argus PT                                                                              |Rechargeable              |                                   |BIPC_566MIX16M35SD965MP               |
 |Reolink                                         |Reolink Video Doorbell                                                                        |Rechargeable              |                                   |DB_560MIXDB32M35DBB14MP               |
@@ -1825,6 +1828,7 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |TuYa                                            |Smoke sensor (TS0205)                                                                         |CR123                     |                                   |                                      |
 |TuYa                                            |Smoke sensor (TS0205_smoke_2)                                                                 |2× AAA                    |                                   |                                      |
 |TuYa                                            |Smoke sensor (TS0601_smoke_1)                                                                 |2× AAA                    |                                   |                                      |
+|Tuya                                            |Soil sensor                                                                                   |2× AAA                    |SGS02Z                             |                                     1|
 |Tuya                                            |Soil Sensor                                                                                   |2× AA                     |TS0601_soil                        |                                     1|
 |Tuya                                            |Soil sensor                                                                                   |2× AAA                    |TS0601_soil_3                      |                                     1|
 |TuYa                                            |Soil sensor (TS0601_soil)                                                                     |2× AA                     |                                   |                                      |
