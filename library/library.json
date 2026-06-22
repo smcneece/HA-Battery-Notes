@@ -4738,6 +4738,14 @@
         },
         {
             "manufacturer": "GS",
+            "model": "Water leakage sensor",
+            "model_id": "SWHM-I1",
+            "hw_version": "16",
+            "battery_type": "AAA",
+            "battery_quantity": 2
+        },
+        {
+            "manufacturer": "GS",
             "model": "Water leakage sensor (SWHM-I1)",
             "battery_type": "AAA",
             "battery_quantity": 2
@@ -6220,6 +6228,12 @@
             "model": "TS0203",
             "battery_type": "CR1632",
             "battery_quantity": 2
+        },
+        {
+            "manufacturer": "Lincukoo",
+            "model": "Wireless switch with 1 button",
+            "model_id": "CZB01",
+            "battery_type": "CR2032"
         },
         {
             "manufacturer": "Linkind",
@@ -12482,6 +12496,19 @@
             "model": "AUGUST_MODEL_NUMBER_HERE",
             "battery_type": "AA",
             "battery_quantity": 4
+        },
+        {
+            "manufacturer": "Yandex",
+            "model": "Double gang wireless switch",
+            "model_id": "YNDX_00535",
+            "battery_type": "CR2450",
+            "battery_quantity": 2
+        },
+        {
+            "manufacturer": "Yandex",
+            "model": "Motion and illuminance sensor",
+            "model_id": "YNDX_00528",
+            "battery_type": "CR2450"
         },
         {
             "manufacturer": "Yeelight",

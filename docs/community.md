@@ -103,6 +103,8 @@ Raise a persistent notification when a battery is low, dismiss when it's not low
 
     Battery Threshold events are only raised when the device has a Battery+ entity or a [Battery Low Template](./index.md/#battery-low-template) is added to the Battery Notes configuration.
 
+    The template condition within the low condition will cause a notification immediately when any device has a low battery. Set this to true if you have implemented an automation to schedule the check_battery_low action and only want notifications at specific times.
+
 ```yaml
 alias: Battery Low Notification
 description: Battery Low Notification with auto dismiss
@@ -120,13 +122,14 @@ triggers:
       battery_low: false
     id: high
     alias: Battery went high
-conditions: []
 actions:
   - choose:
       - conditions:
           - condition: trigger
             id:
               - low
+          - condition: template
+            value_template: "{{ trigger.event.data.reminder == false }}"
         sequence:
           - action: persistent_notification.create
             data:
@@ -184,6 +187,37 @@ conditions: []
 actions:
   - action: battery_notes.check_battery_low
     data: {}
+```
+
+### Battery Low daily summary
+
+If you want a single message sent to your email or other notification service you can use the Check battery low action response to build a summary.
+
+```yaml
+alias: Battery Notes - Low Battery Summary
+description: Send a single summary of all low batteries daily
+triggers:
+  - trigger: time
+    at: "09:00:00"
+conditions: []
+actions:
+  - action: battery_notes.check_battery_low
+    metadata: {}
+    data:
+      raise_events: false
+    response_variable: battery_check_response
+  - variables:
+      battery_summary_message: |
+        {%- for item in battery_check_response.check_battery_battery_low | sort(attribute='battery_level') %}
+        • {{ item.device_name }} - {{ item.battery_level }}% - {{ item.battery_quantity }}× {{ item.battery_type }}
+        {%- endfor %}
+  - action: notify.send_email
+    metadata: {}
+    data:
+      message: "{{ battery_summary_message }}"
+      title: Low battery summary report
+      target: you@youremail.com
+mode: single
 ```
 
 ### Battery Replaced
