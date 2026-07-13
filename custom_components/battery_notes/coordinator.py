@@ -21,6 +21,7 @@ from homeassistant.const import (
 )
 from homeassistant.core import CALLBACK_TYPE, HomeAssistant, callback
 from homeassistant.helpers import (
+    area_registry as ar,
     device_registry as dr,
     entity_registry as er,
     issue_registry as ir,
@@ -33,6 +34,7 @@ from homeassistant.util.hass_dict import HassKey
 
 from .common import validate_is_float
 from .const import (
+    ATTR_AREA_NAME,
     ATTR_BATTERY_LAST_REPLACED,
     ATTR_BATTERY_LEVEL,
     ATTR_BATTERY_LOW,
@@ -432,6 +434,27 @@ class BatteryNotesSubentryCoordinator(DataUpdateCoordinator[None]):
         return self._source_entity_name
 
     @property
+    def area_name(self):
+        """Get the area name of the source_entity_id or device_id."""
+        if self.source_entity_id:
+            entity_registry = er.async_get(self.hass)
+            registry_entry = entity_registry.async_get(self.source_entity_id)
+            if registry_entry and registry_entry.area_id:
+                area_registry = ar.async_get(self.hass)
+                area_entry = area_registry.async_get_area(registry_entry.area_id)
+                if area_entry:
+                    return area_entry.name
+        elif self.device_id:
+            device_registry = dr.async_get(self.hass)
+            device_entry = device_registry.async_get(self.device_id)
+            if device_entry and device_entry.area_id:
+                area_registry = ar.async_get(self.hass)
+                area_entry = area_registry.async_get_area(device_entry.area_id)
+                if area_entry:
+                    return area_entry.name
+        return None
+
+    @property
     def battery_low_template_state(self):
         """Get the current battery low status from a templated device."""
         return self._battery_low_template_state
@@ -454,6 +477,7 @@ class BatteryNotesSubentryCoordinator(DataUpdateCoordinator[None]):
                 {
                     ATTR_DEVICE_ID: self.device_id or "",
                     ATTR_SOURCE_ENTITY_ID: self.source_entity_id or "",
+                    ATTR_AREA_NAME: self.area_name,
                     ATTR_DEVICE_NAME: self.device_name,
                     ATTR_BATTERY_LOW: self.battery_low,
                     ATTR_BATTERY_LOW_THRESHOLD: self.battery_low_threshold,
@@ -487,6 +511,7 @@ class BatteryNotesSubentryCoordinator(DataUpdateCoordinator[None]):
                     {
                         ATTR_DEVICE_ID: self.device_id or "",
                         ATTR_SOURCE_ENTITY_ID: self.source_entity_id or "",
+                        ATTR_AREA_NAME: self.area_name,
                         ATTR_DEVICE_NAME: self.device_name,
                         ATTR_BATTERY_LOW: self.battery_low,
                         ATTR_BATTERY_LOW_THRESHOLD: self.battery_low_threshold,
@@ -522,6 +547,7 @@ class BatteryNotesSubentryCoordinator(DataUpdateCoordinator[None]):
                 {
                     ATTR_DEVICE_ID: self.device_id or "",
                     ATTR_SOURCE_ENTITY_ID: self.source_entity_id or "",
+                    ATTR_AREA_NAME: self.area_name,
                     ATTR_DEVICE_NAME: self.device_name,
                     ATTR_BATTERY_LOW: self.battery_low,
                     ATTR_BATTERY_LOW_THRESHOLD: self.battery_low_threshold,
@@ -555,6 +581,7 @@ class BatteryNotesSubentryCoordinator(DataUpdateCoordinator[None]):
                     {
                         ATTR_DEVICE_ID: self.device_id or "",
                         ATTR_SOURCE_ENTITY_ID: self.source_entity_id or "",
+                        ATTR_AREA_NAME: self.area_name,
                         ATTR_DEVICE_NAME: self.device_name,
                         ATTR_BATTERY_LOW: self.battery_low,
                         ATTR_BATTERY_LOW_THRESHOLD: self.battery_low_threshold,
@@ -608,6 +635,7 @@ class BatteryNotesSubentryCoordinator(DataUpdateCoordinator[None]):
                     {
                         ATTR_DEVICE_ID: self.device_id or "",
                         ATTR_SOURCE_ENTITY_ID: self.source_entity_id or "",
+                        ATTR_AREA_NAME: self.area_name,
                         ATTR_DEVICE_NAME: self.device_name,
                         ATTR_BATTERY_LOW: self.battery_low,
                         ATTR_BATTERY_LOW_THRESHOLD: self.battery_low_threshold,
@@ -644,6 +672,7 @@ class BatteryNotesSubentryCoordinator(DataUpdateCoordinator[None]):
                         {
                             ATTR_DEVICE_ID: self.device_id or "",
                             ATTR_SOURCE_ENTITY_ID: self.source_entity_id or "",
+                            ATTR_AREA_NAME: self.area_name,
                             ATTR_DEVICE_NAME: self.device_name,
                             ATTR_BATTERY_LOW: self.battery_low,
                             ATTR_BATTERY_LOW_THRESHOLD: self.battery_low_threshold,
