@@ -2661,6 +2661,11 @@
             "battery_type": "RB1290X2"
         },
         {
+            "manufacturer": "CPS",
+            "model": "OR1500LCDRM1Ua",
+            "battery_type": "RB0690X4"
+        },
+        {
             "manufacturer": "Custom devices (DiY)",
             "model": "Plant watering sensor zFlora_S (zFlora_S)",
             "battery_type": "CR2450"
@@ -3984,6 +3989,12 @@
             "battery_quantity": 2
         },
         {
+            "manufacturer": "eQ-3",
+            "model": "Thermostat",
+            "battery_type": "AA",
+            "battery_quantity": 2
+        },
+        {
             "manufacturer": "EQ-3 AG",
             "model": "eQ-3 Bluetooth Smart Thermostats",
             "model_id": "CC-RT-BLE-EQ",
@@ -4855,6 +4866,16 @@
             "manufacturer": "HARMAN International Industries",
             "model": "JBL BAR 1000",
             "hw_version": "MT8518",
+            "battery_type": "Rechargeable"
+        },
+        {
+            "manufacturer": "Hatch",
+            "model": "RestIot",
+            "battery_type": "Rechargeable"
+        },
+        {
+            "manufacturer": "Hatch",
+            "model": "RestPlus",
             "battery_type": "Rechargeable"
         },
         {
@@ -10739,6 +10760,12 @@
             "battery_quantity": 2
         },
         {
+            "manufacturer": "Tuya",
+            "model": "Smart button",
+            "model_id": "IH-K663",
+            "battery_type": "CR2032"
+        },
+        {
             "manufacturer": "TuYa",
             "model": "Smart button (IH-K663)",
             "battery_type": "CR2032"
@@ -11580,6 +11607,13 @@
             "model": "\u56db\u952e\u65e0\u7ebf\u60c5\u666f\u5f00\u5173(Zigbee)",
             "model_id": "aaabrnhr",
             "battery_type": "CR2032"
+        },
+        {
+            "manufacturer": "Tuya",
+            "model": "\u571f\u58e4\u6c34\u4efd\u4f20\u611f\u5668",
+            "model_id": "npj9bug3",
+            "battery_type": "AAA",
+            "battery_quantity": 2
         },
         {
             "manufacturer": "Tuya",
@@ -12957,6 +12991,16 @@
             "battery_type": "Rechargeable"
         },
         {
+            "manufacturer": "Yoto",
+            "model": "Yoto Mini",
+            "battery_type": "Rechargeable"
+        },
+        {
+            "manufacturer": "Yoto",
+            "model": "Yoto Player",
+            "battery_type": "Rechargeable"
+        },
+        {
             "manufacturer": "Zbeacon",
             "model": "DS01",
             "battery_type": "MANUAL"
@@ -13026,6 +13070,11 @@
             "model": "Q Sensor",
             "battery_type": "CR123A",
             "battery_quantity": 2
+        },
+        {
+            "manufacturer": "Zooz",
+            "model": "ZAC36",
+            "battery_type": "Rechargeable"
         },
         {
             "manufacturer": "Zooz",
