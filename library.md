@@ -1,4 +1,4 @@
-## 2271 Devices in library
+## 2273 Devices in library
 
 This file is auto generated, do not modify
 
@@ -337,6 +337,7 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |Aqara                                           |Wireless mini switch                                                                          |CR2032                    |WXKG11LM                                                                |
 |Aqara                                           |Wireless mini switch (with gyroscope)                                                         |CR2032                    |WXKG12LM                                                                |
 |Aqara                                           |Wireless mini switch (WXKG11LM)                                                               |CR2032                    |                                                                        |
+|Aqara                                           |Wireless mini switch E1                                                                       |CR2032                    |WXKG20LM                                                                |
 |Aqara                                           |Wireless mini switch T1                                                                       |CR2032                    |WXKG13LM                                                                |
 |Aqara                                           |Wireless mini switch T1 (WXKG13LM)                                                            |CR2032                    |                                                                        |
 |Aqara                                           |Wireless remote switch (double rocker), 2016 model                                            |CR2032                    |WXKG02LM_rev1                                                           |
@@ -561,6 +562,7 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |Eltako                                          |A5-08-01                                                                                      |CR2032                    |                                                                        |
 |Ember                                           |Ember Mug 2 (14oz)                                                                            |Rechargeable              |                                                                        |
 |eQ-3                                            |ELV-SH-CTH                                                                                    |CR2032                    |                                                                        |
+|eQ-3                                            |eTRV-F                                                                                        |2× AA                     |HmIP-eTRV-F                                                             |
 |eQ-3                                            |HM-CC-RT-DN                                                                                   |2× AA                     |                                                                        |
 |eQ-3                                            |HM-CC-TC                                                                                      |2× AA                     |                                                                        |
 |eQ-3                                            |HM-CC-VD                                                                                      |2× AA                     |                                                                        |
