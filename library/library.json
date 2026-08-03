@@ -4838,6 +4838,13 @@
             "battery_quantity": 2
         },
         {
+            "manufacturer": "Guard Dog Security",
+            "model": "BS_PLD01",
+            "model_id": "wgv4haro",
+            "battery_type": "AAA",
+            "battery_quantity": 4
+        },
+        {
             "manufacturer": "HAB Home Intelligence LLC",
             "model": "iblinds V3",
             "battery_type": "Rechargeable"
@@ -5105,6 +5112,12 @@
             "model": "Door/window sensor",
             "model_id": "(ZG-102ZA)",
             "hw_version": "1",
+            "battery_type": "CR2032"
+        },
+        {
+            "manufacturer": "HOBEIAN",
+            "model": "door/window sensor",
+            "model_id": "ZG-102Z",
             "battery_type": "CR2032"
         },
         {
@@ -9160,6 +9173,12 @@
             "model": "Myfox Security Siren",
             "battery_type": "LR20",
             "battery_quantity": 4
+        },
+        {
+            "manufacturer": "Somfy",
+            "model": "RollerShutter",
+            "model_id": "DynamicRollerShutter",
+            "battery_type": "MANUAL"
         },
         {
             "manufacturer": "Somfy",

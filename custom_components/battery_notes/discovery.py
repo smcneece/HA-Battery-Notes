@@ -12,7 +12,7 @@ from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers import discovery_flow
 from homeassistant.loader import Integration, async_get_integration
 
-from .common import get_device_model_id
+from .common import get_device_model_id, is_composite_device_id
 from .const import (
     CONF_BATTERY_QUANTITY,
     CONF_BATTERY_TYPE,
@@ -101,6 +101,9 @@ class DiscoveryManager:
                 if not self.should_process_device(device_entry):
                     continue
 
+                if is_composite_device_id(self.hass, device_entry.id):
+                    continue
+
                 model_info = await autodiscover_model(device_entry)
                 if (
                     not model_info
@@ -119,6 +122,7 @@ class DiscoveryManager:
                 if device_battery_details.is_manual:
                     continue
 
+                # Change to device_entry.config_entry_id when HA 2026.8 is minimum
                 config_entry_id = next(iter(device_entry.config_entries))
                 config_entry = self.hass.config_entries.async_get_entry(config_entry_id)
                 if config_entry:
@@ -191,6 +195,16 @@ class DiscoveryManager:
         )
         discovery_data[CONF_INTEGRATION_NAME] = (
             integration.name if integration else None
+        )
+
+        _LOGGER.info(
+            "Auto discovered device %s in %s (manufacturer=%s, model=%s, model_id=%s, hw_version=%s)",
+            discovery_data[CONF_DEVICE_NAME],
+            discovery_data[CONF_INTEGRATION_NAME],
+            discovery_data[CONF_MANUFACTURER],
+            discovery_data[CONF_MODEL],
+            discovery_data[CONF_MODEL_ID],
+            discovery_data[CONF_HW_VERSION],
         )
 
         discovery_flow.async_create_flow(

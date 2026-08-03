@@ -1,4 +1,4 @@
-## 2273 Devices in library
+## 2276 Devices in library
 
 This file is auto generated, do not modify
 
@@ -843,6 +843,7 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |GS                                              |Temperature and humidity sensor (STHM-I1H)                                                    |CR2450                    |                                                                        |
 |GS                                              |Water leakage sensor                                                                          |2× AAA                    |SWHM-I1                                                                 |
 |GS                                              |Water leakage sensor (SWHM-I1)                                                                |2× AAA                    |                                                                        |
+|Guard Dog Security                              |BS_PLD01                                                                                      |4× AAA                    |wgv4haro                                                                |
 |HAB Home Intelligence LLC                       |iblinds V3                                                                                    |Rechargeable              |                                                                        |
 |HAB Home Intelligence, LLC                      |IB2.0                                                                                         |Rechargeable              |                                                                        |
 |HANK Electronics Ltd.                           |HKZW-DWS01                                                                                    |2× AAA                    |                                                                        |
@@ -889,6 +890,7 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |Hive                                            |Radiator valve (UK7004240)                                                                    |2× AA                     |                                                                        |
 |Hive                                            |TRV003                                                                                        |2× AA                     |                                                                        |
 |HOBEIAN                                         |Door/window sensor                                                                            |CR2032                    |(ZG-102ZA)                                                              |
+|HOBEIAN                                         |door/window sensor                                                                            |CR2032                    |ZG-102Z                                                                 |
 |HOBEIAN                                         |Door/window sensor                                                                            |2× AAA                    |ZG-102ZA                                                                |
 |HOBEIAN                                         |Human Presence Sensor                                                                         |2× AAA                    |ZG-204ZH                                                                |
 |HOBEIAN                                         |Millimeter wave motion detection                                                              |2× AAA                    |ZG-204ZV                                                                |
@@ -1596,6 +1598,7 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |Somfy                                           |Myfox Security Infrared Sensor                                                                |CR123A                    |                                                                        |
 |Somfy                                           |Myfox Security Outdoor Siren                                                                  |4× LR20                   |                                                                        |
 |Somfy                                           |Myfox Security Siren                                                                          |4× LR20                   |                                                                        |
+|Somfy                                           |RollerShutter                                                                                 |MANUAL                    |DynamicRollerShutter                                                    |
 |Somfy                                           |Somfy Smoke Detector                                                                          |2× AA                     |                                                                        |
 |SOMFY                                           |Sonesse 28 WF Li-Ion Roller                                                                   |Rechargeable              |                                                                        |
 |SOMFY                                           |Sonesse 28 WF Li-Ion Roller                                                                   |MANUAL                    |                                                                        |
