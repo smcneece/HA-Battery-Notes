@@ -1,4 +1,4 @@
-## 2276 Devices in library
+## 2281 Devices in library
 
 This file is auto generated, do not modify
 
@@ -772,6 +772,7 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |Fibargroup                                      |Motion Sensor (FGMS001)                                                                       |CR123A                    |                                                                        |
 |Fibargroup                                      |Motion_Sensor_FGMS001                                                                         |CR123A                    |                                                                        |
 |First Alert                                     |1044807                                                                                       |2× AA                     |                                                                        |
+|First Alert                                     |SMCO410                                                                                       |Irreplaceable             |                                                                        |
 |First Alert                                     |Smoke Alarm                                                                                   |2× AA                     |                                                                        |
 |First Alert (BRK Brands Inc)                    |ZCOMBO                                                                                        |2× AA                     |                                                                        |
 |Flair                                           |Smart Vent                                                                                    |2× C                      |                                                                        |
@@ -1376,6 +1377,7 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |Remsol                                          |ismartgateMINI                                                                                |2× LR1                    |                                                                        |
 |Reolink                                         |Argus 3 Ultra                                                                                 |Rechargeable              |                                                                        |
 |reolink                                         |Argus Eco Ultra                                                                               |Rechargeable              |                                                                        |
+|Reolink                                         |Argus MagiCam                                                                                 |2× AA                     |                                                                        |
 |Reolink                                         |Reolink Argus PT                                                                              |Rechargeable              |                                                                        |
 |Reolink                                         |Reolink Video Doorbell                                                                        |Rechargeable              |                                                                        |
 |RGB Genie                                       |Zigbee 3.0 remote control (ZB-5001)                                                           |CR2032                    |                                                                        |
@@ -1672,6 +1674,7 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |switchbot                                       |Roller Shade                                                                                  |Rechargeable              |                                                                        |
 |SwitchBot                                       |Smart Lock Pro                                                                                |4× AA                     |                                                                        |
 |SwitchBot                                       |Smart Lock Pro                                                                                |2× Rechargeable           |                                                                        |
+|SwitchBot                                       |Smart Thermostat Radiator                                                                     |2× AA                     |                                                                        |
 |Switchbot                                       |W070160X                                                                                      |Rechargeable              |                                                                        |
 |SwitchBot                                       |W1101500                                                                                      |2× AAA                    |                                                                        |
 |SwitchBot                                       |W1201500                                                                                      |2× AAA                    |                                                                        |
@@ -1743,6 +1746,8 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |Third Reality, Inc                              |3RSB015BZ                                                                                     |4× AA                     |                                                                        |
 |Third Reality, Inc                              |3RSB22BZ                                                                                      |2× AAA                    |                                                                        |
 |Third Reality, Inc                              |3RSM0147Z                                                                                     |AA                        |                                                                        |
+|Third Reality, Inc                              |3RSM0347Z                                                                                     |AA                        |                                                                        |
+|Third Reality, Inc                              |3RSMR01067Z                                                                                   |3× AA                     |                                                                        |
 |Third Reality, Inc                              |3RSS009Z                                                                                      |2× AAA                    |                                                                        |
 |Third Reality, Inc                              |3RTHS24BZ                                                                                     |2× AAA                    |                                                                        |
 |Third Reality, Inc                              |3RVS01031Z                                                                                    |2× AAA                    |                                                                        |
