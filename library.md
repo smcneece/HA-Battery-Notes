@@ -1,4 +1,4 @@
-## 2297 Devices in library
+## 2301 Devices in library
 
 This file is auto generated, do not modify
 
@@ -640,6 +640,8 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |eQ-3                                            |HmIP-eTRV-C-2                                                                                 |2× AA                     |                                                                        |
 |eQ-3                                            |HmIP-eTRV-CL                                                                                  |4× AA                     |                                                                        |
 |eQ-3                                            |HMIP-eTRV-E                                                                                   |2× AA                     |                                                                        |
+|eQ-3                                            |HmIP-eTRV-E                                                                                   |2× AA                     |                                                                        |
+|eQ-3                                            |HmIP-eTRV-E                                                                                   |2× AA                     |Homematic IP Heizkörperthermostat - Evo                                 |
 |eQ-3                                            |HmIP-eTRV-E-S                                                                                 |2× AA                     |HmIP-eTRV-E-S                                                           |
 |eQ-3                                            |HmIP-eTRV-F                                                                                   |2× AA                     |Homematic IP Heizkörperthermostat mit Durchflussmessung                 |
 |eq-3                                            |HmIP-FCI1                                                                                     |CR2032                    |                                                                        |
@@ -1660,6 +1662,7 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |SONOFF                                          |Zigbee PIR sensor (SNZB-03P)                                                                  |CR2477                    |                                                                        |
 |SONOFF                                          |Zigbee smart curtain motor                                                                    |Rechargeable              |ZBCurtain                                                               |
 |SONOFF                                          |Zigbee smart water valve                                                                      |4× AA                     |SWV                                                                     |
+|SONOFF                                          |Zigbee thermostatic radiator valve                                                            |2× AA                     |TRV-ZBT                                                                 |
 |SONOFF                                          |Zigbee thermostatic radiator valve                                                            |3× AA                     |TRVZB                                                                   |
 |SONOFF                                          |Zigbee thermostatic radiator valve (TRVZB)                                                    |3× AA                     |                                                                        |
 |Sonoff                                          |Zigbee water sensor                                                                           |CR2477                    |SNZB-05P                                                                |
@@ -2030,6 +2033,7 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |TUYATEC-dgtxmihe                                |PIR sensor                                                                                    |CR2450                    |RH3040                                                                  |
 |TUYATEC-r9hgssol                                |RH3001                                                                                        |CR2450                    |                                                                        |
 |TUYATEC-riuj5xzs                                |RH3052                                                                                        |CR2032                    |                                                                        |
+|TUYATEC-rwjlk9td                                |RH3040                                                                                        |CR2450                    |                                                                        |
 |TUYATEC-vhrcfp2v                                |RH3001                                                                                        |CR2032                    |                                                                        |
 |TUYATEC-xrvzm3yI                                |RH3001                                                                                        |CR2032                    |                                                                        |
 |TUYATEC-yg5dcbfu                                |RH3052                                                                                        |CR2032                    |                                                                        |
