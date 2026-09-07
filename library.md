@@ -1,4 +1,4 @@
-## 2301 Devices in library
+## 2305 Devices in library
 
 This file is auto generated, do not modify
 
@@ -1574,6 +1574,7 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |Sinopé                                          |LM4110ZB                                                                                      |3× AA                     |                                                                        |
 |Siterwell                                       |Radiator valve with thermostat                                                                |2× AA                     |GS361A-H04                                                              |
 |Siterwell                                       |Radiator valve with thermostat (GS361A-H04)                                                   |2× AA                     |                                                                        |
+|Slacky-DIY                                      |Tuya wireless switch with 1 buttons with custom firmware                                      |CR2032                    |TS0041-M005-SlD                                                         |
 |SMaBiT (Bitron Video)                           |4 button Zigbee remote control (AV2010/23)                                                    |CR2032                    |                                                                        |
 |SMaBiT (Bitron Video)                           |Compact magnetic contact sensor (AV2010/21A)                                                  |CR2                       |                                                                        |
 |SMaBiT (Bitron Video)                           |Optical smoke detector (hardware version v2)                                                  |3× AA                     |AV2010/24A                                                              |
@@ -1635,9 +1636,11 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |SONOFF                                          |SNZB-02D                                                                                      |CR2450                    |                                                                        |
 |SONOFF                                          |SNZB-02DR2                                                                                    |2× AAA                    |                                                                        |
 |SONOFF                                          |SNZB-02LD                                                                                     |CR2477                    |                                                                        |
+|Sonoff                                          |SNZB-02M                                                                                      |CR2477                    |                                                                        |
 |SONOFF                                          |SNZB-02P                                                                                      |CR2477                    |                                                                        |
 |SONOFF                                          |SNZB-02WD                                                                                     |CR2477                    |                                                                        |
 |Sonoff                                          |SNZB-03                                                                                       |CR2032                    |                                                                        |
+|Sonoff                                          |SNZB-03PR2                                                                                    |CR2477                    |                                                                        |
 |SONOFF                                          |SNZB-04                                                                                       |2× AAA                    |                                                                        |
 |Sonoff                                          |SNZB-04P                                                                                      |CR2477                    |                                                                        |
 |SONOFF                                          |SNZB-04PR2                                                                                    |2× AAA                    |                                                                        |
@@ -2230,6 +2233,7 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |Xiaomi Aqara                                    |weather.v1                                                                                    |CR2032                    |                                                                        |
 |Xiaomi Aquara                                   |sensor_magnet.aq2                                                                             |CR1632                    |                                                                        |
 |Yale                                            |420D                                                                                          |4× AA                     |                                                                        |
+|Yale                                            |Control4 module for Yale KeyFree/Keyless/Doorman/Assure/nexTouch locks                        |4× AA                     |ZYA-C4-MOD-S                                                            |
 |Yale                                            |P-KFCON-MOD-YALE                                                                              |4× AA                     |                                                                        |
 |Yale                                            |SD-L1000-CH                                                                                   |4× AA                     |                                                                        |
 |Yale                                            |TEST200228                                                                                    |4× AA                     |                                                                        |

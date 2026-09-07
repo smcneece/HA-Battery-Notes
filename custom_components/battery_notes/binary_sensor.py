@@ -463,6 +463,16 @@ class BatteryNotesBatteryLowBinaryTemplateSensor(
             else template.result_as_boolean(result)
         )
 
+        if state not in [
+            STATE_UNAVAILABLE,
+            STATE_UNKNOWN,
+        ]:
+            self.coordinator.last_reported = dt_util.utcnow()
+            _LOGGER.debug(
+                "Entity id %s has been reported via template.",
+                self.entity_id,
+            )
+
         if state == self._state:
             return
 
@@ -813,7 +823,7 @@ class BatteryNotesBatteryBinaryLowSensor(BatteryNotesNonTemplateBatteryLowSensor
             self.async_write_ha_state()
             return
 
-        self._attr_is_on = self.coordinator.battery_low_binary_state == "on"
+        self._attr_is_on = self.coordinator.battery_low_binary_state
 
         self.async_write_ha_state()
 
