@@ -1,4 +1,4 @@
-## 2328 Devices in library
+## 2331 Devices in library
 
 This file is auto generated, do not modify
 
@@ -912,6 +912,7 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |Hive                                            |Radiator valve                                                                                |2× AA                     |UK7004240                                                                             |
 |Hive                                            |Radiator valve (UK7004240)                                                                    |2× AA                     |                                                                                      |
 |Hive                                            |TRV003                                                                                        |2× AA                     |                                                                                      |
+|HOBEIAN                                         |24Ghz human presence sensor                                                                   |CR2450                    |ZG-204ZK                                                                              |
 |HOBEIAN                                         |Door/window sensor                                                                            |CR2032                    |(ZG-102ZA)                                                                            |
 |HOBEIAN                                         |door/window sensor                                                                            |CR2032                    |ZG-102Z                                                                               |
 |HOBEIAN                                         |Door/window sensor                                                                            |2× AAA                    |ZG-102ZA                                                                              |
@@ -1707,6 +1708,7 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |Sure Petcare                                    |Sure Petcare Pet Door                                                                         |4× C                      |                                                                                      |
 |Sure Petcare                                    |Feeder\*                                                                                      |4× C                      |                                                                                      |
 |SwitchBot                                       |Bot                                                                                           |CR2                       |                                                                                      |
+|switchbot                                       |Keypad Vision                                                                                 |Rechargeable              |                                                                                      |
 |switchbot                                       |Leak Detector                                                                                 |2× AAA                    |                                                                                      |
 |switchbot                                       |Lock Ultra                                                                                    |Rechargeable              |                                                                                      |
 |SwitchBot                                       |Meter                                                                                         |2× AAA                    |                                                                                      |
@@ -1768,6 +1770,7 @@ Request new devices to be added to the library [here](https://github.com/andrew-
 |Third Reality                                   |Garage door tilt sensor (3RDTS01056Z)                                                         |2× AAA                    |                                                                                      |
 |Third Reality                                   |Smart button (3RSB22BZ)                                                                       |2× AAA                    |                                                                                      |
 |Third Reality                                   |Smart motion sensor R1                                                                        |3× AA                     |3RSMR01067Z                                                                           |
+|Third Reality                                   |Smart Scale                                                                                   |2× AAA                    |3RKS030Z                                                                              |
 |Third Reality                                   |Smart Soil Moisture Sensor                                                                    |AA                        |3RSM0147Z                                                                             |
 |Third Reality                                   |Smart switch Gen3                                                                             |2× AAA                    |3RSS009Z                                                                              |
 |Third Reality                                   |Smart switch Gen3 (3RSS009Z)                                                                  |2× AAA                    |                                                                                      |

@@ -8,10 +8,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Any
 
-import voluptuous as vol
-
 from homeassistant.components.sensor import (
-    PLATFORM_SCHEMA,
     RestoreSensor,
     SensorDeviceClass,
     SensorEntity,
@@ -20,8 +17,6 @@ from homeassistant.components.sensor import (
 )
 from homeassistant.config_entries import ConfigSubentry
 from homeassistant.const import (
-    CONF_DEVICE_ID,
-    CONF_NAME,
     PERCENTAGE,
     STATE_UNAVAILABLE,
     STATE_UNKNOWN,
@@ -29,7 +24,6 @@ from homeassistant.const import (
 from homeassistant.core import Event, HomeAssistant, callback
 from homeassistant.exceptions import TemplateError
 from homeassistant.helpers import (
-    config_validation as cv,
     entity_registry as er,
 )
 from homeassistant.helpers.entity import EntityCategory
@@ -71,11 +65,8 @@ from .const import (
     ATTR_NOTE,
     ATTR_SOURCE_ENTITY_ID,
     CONF_ADVANCED_SETTINGS,
-    CONF_BATTERY_QUANTITY,
-    CONF_BATTERY_TYPE,
     CONF_ENABLE_REPLACED,
     CONF_ROUND_BATTERY,
-    CONF_SOURCE_ENTITY_ID,
     DOMAIN,
     STATE_WRITE_INTERVAL_SECONDS,
     SUBENTRY_BATTERY_NOTE,
@@ -99,16 +90,6 @@ class BatteryNotesSensorEntityDescription(
     unique_id_suffix: str
 
 
-PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
-    {
-        vol.Optional(CONF_NAME): cv.string,
-        vol.Optional(CONF_DEVICE_ID): cv.string,
-        vol.Optional(CONF_SOURCE_ENTITY_ID): cv.string,
-        vol.Required(CONF_BATTERY_TYPE): cv.string,
-        vol.Required(CONF_BATTERY_QUANTITY): cv.positive_int,
-    }
-)
-
 _LOGGER = logging.getLogger(__name__)
 
 
@@ -119,10 +100,7 @@ async def async_setup_entry(
 ) -> None:
     """Initialize Battery Type config entry."""
 
-    for subentry in config_entry.subentries.values():
-        if subentry.subentry_type != SUBENTRY_BATTERY_NOTE:
-            continue
-
+    for subentry in config_entry.get_subentries_of_type(SUBENTRY_BATTERY_NOTE):
         assert config_entry.runtime_data.subentry_coordinators
         coordinator = config_entry.runtime_data.subentry_coordinators.get(
             subentry.subentry_id
@@ -162,9 +140,7 @@ async def async_setup_entry(
             translation_key="battery_plus",
             device_class=SensorDeviceClass.BATTERY,
             suggested_display_precision=0
-            if config_entry.options[CONF_ADVANCED_SETTINGS].get(
-                CONF_ROUND_BATTERY, True
-            )
+            if config_entry.options.get(CONF_ROUND_BATTERY, False)
             else 1,
             entity_type="sensor",
             require_device=True,
@@ -202,9 +178,7 @@ async def async_setup_entry(
                     config_entry.options[CONF_ADVANCED_SETTINGS].get(
                         CONF_ENABLE_REPLACED, True
                     ),
-                    config_entry.options[CONF_ADVANCED_SETTINGS].get(
-                        CONF_ROUND_BATTERY, False
-                    ),
+                    config_entry.options.get(CONF_ROUND_BATTERY, False),
                     coordinator.battery_percentage_template,
                 )
             )
@@ -220,9 +194,7 @@ async def async_setup_entry(
                     config_entry.options[CONF_ADVANCED_SETTINGS].get(
                         CONF_ENABLE_REPLACED, True
                     ),
-                    config_entry.options[CONF_ADVANCED_SETTINGS].get(
-                        CONF_ROUND_BATTERY, False
-                    ),
+                    config_entry.options.get(CONF_ROUND_BATTERY, False),
                 )
             )
 
@@ -425,6 +397,7 @@ class BatteryNotesBatteryPlusBaseSensor(BatteryNotesEntity, RestoreSensor):
         self._last_ha_state_write: datetime | None = None
         self._last_written_battery_level: float | None = None
         self._last_written_last_replaced: datetime | None = None
+        self._last_written_available: bool | None = None
 
     @callback
     def _write_tracked_ha_state(self) -> None:
@@ -446,6 +419,7 @@ class BatteryNotesBatteryPlusBaseSensor(BatteryNotesEntity, RestoreSensor):
             if (
                 current_battery_level == self._last_written_battery_level
                 and current_last_replaced == self._last_written_last_replaced
+                and self.available == self._last_written_available
                 and (dt_util.utcnow() - self._last_ha_state_write).total_seconds()
                 < STATE_WRITE_INTERVAL_SECONDS
             ):
@@ -454,6 +428,7 @@ class BatteryNotesBatteryPlusBaseSensor(BatteryNotesEntity, RestoreSensor):
         self._last_ha_state_write = dt_util.utcnow()
         self._last_written_battery_level = current_battery_level
         self._last_written_last_replaced = current_last_replaced
+        self._last_written_available = self.available
         self.async_write_ha_state()
 
     @property
@@ -516,7 +491,6 @@ class BatteryNotesBatteryPlusSensor(BatteryNotesBatteryPlusBaseSensor):
             round_battery=round_battery,
         )
 
-    @callback
     async def async_state_changed_listener(
         self,
         event: Event[EventStateChangedData] | None = None,  # noqa: ARG002
@@ -571,7 +545,6 @@ class BatteryNotesBatteryPlusSensor(BatteryNotesBatteryPlusBaseSensor):
 
         self._write_tracked_ha_state()
 
-    @callback
     async def async_state_reported_listener(
         self,
         event: Event[EventStateReportedData] | None = None,  # noqa: ARG002
@@ -636,7 +609,6 @@ class BatteryNotesBatteryPlusSensor(BatteryNotesBatteryPlusBaseSensor):
     ) -> None:
         """Listen for battery entity_id changes and update battery_plus."""
 
-        @callback
         async def _entity_rename_listener(
             event: Event[er.EventEntityRegistryUpdatedData],
         ) -> None:
@@ -689,23 +661,25 @@ class BatteryNotesBatteryPlusSensor(BatteryNotesBatteryPlusBaseSensor):
                 and event_data["old_entity_id"] == source_entity_id
             )
 
-        self.hass.bus.async_listen(
-            EVENT_ENTITY_REGISTRY_UPDATED,
-            _entity_rename_listener,
-            event_filter=_filter_entity_id,
+        self.async_on_remove(
+            self.hass.bus.async_listen(
+                EVENT_ENTITY_REGISTRY_UPDATED,
+                _entity_rename_listener,
+                event_filter=_filter_entity_id,
+            )
         )
 
     async def async_added_to_hass(self) -> None:
         """Handle added to Hass."""
 
-        @callback
+        await super().async_added_to_hass()
+
         async def _async_state_changed_listener(
             event: Event[EventStateChangedData] | None = None,
         ) -> None:
             """Handle child updates."""
             await self.async_state_changed_listener(event)
 
-        @callback
         async def _async_state_reported_listener(
             event: Event[EventStateReportedData] | None = None,
         ) -> None:
@@ -771,10 +745,6 @@ class BatteryNotesBatteryPlusSensor(BatteryNotesBatteryPlusBaseSensor):
             registry.async_update_entity(
                 self.coordinator.wrapped_battery.entity_id, hidden_by=None
             )
-
-        self.async_on_remove(
-            self.coordinator.async_add_listener(self._handle_coordinator_update)
-        )
 
         await self.coordinator.async_refresh()
 
@@ -850,7 +820,7 @@ class BatteryNotesBatteryPlusTemplateSensor(BatteryNotesBatteryPlusBaseSensor):
 
         self._async_setup_templates()
 
-        async_at_start(self.hass, self._async_template_startup)
+        self.async_on_remove(async_at_start(self.hass, self._async_template_startup))
 
     def add_template_attribute(
         self,
@@ -985,7 +955,7 @@ class BatteryNotesBatteryPlusTemplateSensor(BatteryNotesBatteryPlusBaseSensor):
         self._state = clamped_state
         self.coordinator.current_battery_level = clamped_state
 
-        self._attr_available = True
+        self._attr_available = clamped_state is not None
         self._attr_native_value = self.coordinator.rounded_battery_level
 
         _LOGGER.debug(
