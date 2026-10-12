@@ -136,7 +136,7 @@ class BatteryNotesSubentryCoordinator(DataUpdateCoordinator[None]):
     wrapped_battery: RegistryEntry | None = None
     wrapped_battery_low: RegistryEntry | None = None
     is_orphaned: bool = False
-    last_wrapped_battery_state_write: datetime = dt_util.utcnow() - timedelta(hours=2)
+    last_wrapped_battery_state_write: datetime | None = None
     _current_battery_level: str | None = None
     _previous_battery_low: bool | None = None
     _previous_battery_level: str | None = None
@@ -311,6 +311,7 @@ class BatteryNotesSubentryCoordinator(DataUpdateCoordinator[None]):
                 )
                 return False
 
+            self.device_id = entity.device_id
             device_class = entity.device_class or entity.original_device_class
             unit_of_measurement = self._source_unit_of_measurement(entity)
             # Sensor and binary sensor battery device classes share the same value
@@ -658,6 +659,7 @@ class BatteryNotesSubentryCoordinator(DataUpdateCoordinator[None]):
             ATTR_BATTERY_TYPE_AND_QUANTITY: self.battery_type_and_quantity,
             ATTR_BATTERY_TYPE: self.battery_type,
             ATTR_BATTERY_QUANTITY: self.battery_quantity,
+            ATTR_NOTE: self.battery_note,
             **(extra or {}),
         }
 
@@ -678,7 +680,6 @@ class BatteryNotesSubentryCoordinator(DataUpdateCoordinator[None]):
                 ATTR_BATTERY_LOW: self.battery_low,
                 ATTR_BATTERY_INCREASE_THRESHOLD: self.battery_increased_threshold,
                 ATTR_BATTERY_LOW_THRESHOLD: self.battery_low_threshold,
-                ATTR_NOTE: self.battery_note,
                 ATTR_BATTERY_LEVEL: battery_level,
                 ATTR_PREVIOUS_BATTERY_LEVEL: previous_battery_level,
                 ATTR_BATTERY_LAST_REPLACED: self.last_replaced,

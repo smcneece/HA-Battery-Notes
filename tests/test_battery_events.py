@@ -1,6 +1,7 @@
 """Tests for battery threshold and increased events driven by source states."""
 
 from dataclasses import replace
+from datetime import timedelta
 from types import MappingProxyType
 
 import pytest
@@ -11,12 +12,14 @@ from custom_components.battery_notes.const import (
     ATTR_PREVIOUS_BATTERY_LEVEL,
     CONF_ADVANCED_SETTINGS,
     CONF_BATTERY_LOW_TEMPLATE,
+    CONF_BATTERY_PERCENTAGE_TEMPLATE,
     CONF_BATTERY_QUANTITY,
     CONF_BATTERY_TYPE,
     CONF_DEFAULT_BATTERY_INCREASE_THRESHOLD,
     CONF_DEFAULT_BATTERY_LOW_THRESHOLD,
     CONF_FILTER_OUTLIERS,
     CONF_RETAIN_STATE,
+    CONF_ROUND_BATTERY,
     CONF_SOURCE_ENTITY_ID,
     DOMAIN,
     EVENT_BATTERY_INCREASED,
@@ -43,6 +46,7 @@ from homeassistant.const import (
 )
 from homeassistant.core import Event, HomeAssistant, callback
 from homeassistant.helpers import device_registry as dr, entity_registry as er
+from homeassistant.util import dt as dt_util
 
 from . import setup_integration
 
@@ -287,6 +291,74 @@ async def test_percentage_unavailable_source_disabled_battery_plus(
     assert battery_events == []
 
 
+@pytest.fixture(params=[False, True], ids=["default", "retain-state"])
+def percentage_template_note_entry(
+    hass: HomeAssistant,
+    mock_config_entry: MockConfigEntry,
+    mock_battery_note_subentry: ConfigSubentry,
+    request: pytest.FixtureRequest,
+) -> MockConfigEntry:
+    """Create a note whose level comes from a percentage template."""
+    hass.states.async_set("sensor.template_battery", "40")
+    subentry = replace(
+        mock_battery_note_subentry,
+        data=MappingProxyType(
+            {
+                **mock_battery_note_subentry.data,
+                CONF_ADVANCED_SETTINGS: {
+                    CONF_BATTERY_PERCENTAGE_TEMPLATE: "{{ states('sensor.template_battery') }}",
+                    CONF_RETAIN_STATE: request.param,
+                },
+            }
+        ),
+    )
+    return _note_entry(mock_config_entry, subentry)
+
+
+@pytest.mark.parametrize("battery_note_source", ["device"])
+@pytest.mark.parametrize("unavailable_state", [STATE_UNAVAILABLE, STATE_UNKNOWN])
+async def test_percentage_template_unavailable_source(
+    hass: HomeAssistant,
+    percentage_template_note_entry: MockConfigEntry,
+    battery_events: list[Event],
+    freezer: FrozenDateTimeFactory,
+    unavailable_state: str,
+) -> None:
+    """Test retention and reporting when a percentage template source recovers."""
+    entry = percentage_template_note_entry
+    await setup_integration(hass, entry)
+    battery_plus_id = _battery_plus_entity_id(hass, entry)
+    battery_low_id = _battery_low_entity_id(hass, entry)
+    coordinator = next(iter(entry.runtime_data.subentry_coordinators.values()))
+    assert hass.states.get(battery_plus_id).state == "40.0"
+    assert hass.states.get(battery_low_id).state == STATE_OFF
+
+    hass.states.async_set("sensor.template_battery", "5")
+    await hass.async_block_till_done()
+    assert _summary(battery_events) == [(EVENT_BATTERY_THRESHOLD, True)]
+    last_reported = coordinator.last_reported
+
+    freezer.tick(timedelta(hours=1))
+    hass.states.async_set("sensor.template_battery", unavailable_state)
+    await hass.async_block_till_done()
+    expected_states = {
+        True: ("5.0", STATE_ON),
+        False: (STATE_UNAVAILABLE, STATE_UNAVAILABLE),
+    }[coordinator.retain_state]
+    assert hass.states.get(battery_plus_id).state == expected_states[0]
+    assert hass.states.get(battery_low_id).state == expected_states[1]
+    assert coordinator.last_reported == last_reported
+    assert _summary(battery_events) == [(EVENT_BATTERY_THRESHOLD, True)]
+
+    freezer.tick(timedelta(hours=1))
+    hass.states.async_set("sensor.template_battery", "5")
+    await hass.async_block_till_done()
+    assert hass.states.get(battery_plus_id).state == "5.0"
+    assert hass.states.get(battery_low_id).state == STATE_ON
+    assert coordinator.last_reported == dt_util.utcnow()
+    assert _summary(battery_events) == [(EVENT_BATTERY_THRESHOLD, True)]
+
+
 @pytest.mark.parametrize(
     ("mock_config_entry", "report"),
     [
@@ -320,6 +392,39 @@ async def test_default_threshold_options(
     await _set_level(hass, battery_note_sensor.entity_id, level)
 
     assert _summary(battery_events) == expected
+
+
+@pytest.mark.parametrize(
+    "mock_config_entry", [{CONF_ROUND_BATTERY: True}], indirect=True
+)
+@pytest.mark.parametrize("battery_note_source", ["device"])
+async def test_repeated_reports_throttled(
+    hass: HomeAssistant,
+    battery_note_config_entry: MockConfigEntry,
+    battery_note_sensor: er.RegistryEntry,
+    freezer: FrozenDateTimeFactory,
+) -> None:
+    """Test reports of an unchanged fractional level are processed hourly."""
+    await setup_integration(hass, battery_note_config_entry)
+    coordinator = next(
+        iter(battery_note_config_entry.runtime_data.subentry_coordinators.values())
+    )
+    await _set_level(hass, battery_note_sensor.entity_id, "57.6")
+
+    # The first report of the level is processed
+    freezer.tick(timedelta(minutes=10))
+    await _set_level(hass, battery_note_sensor.entity_id, "57.6")
+    first_report = coordinator.last_reported
+    assert first_report == dt_util.utcnow()
+
+    # Further reports within the hour are skipped, even though the level is rounded
+    freezer.tick(timedelta(minutes=10))
+    await _set_level(hass, battery_note_sensor.entity_id, "57.6")
+    assert coordinator.last_reported == first_report
+
+    freezer.tick(timedelta(hours=1))
+    await _set_level(hass, battery_note_sensor.entity_id, "57.6")
+    assert coordinator.last_reported == dt_util.utcnow()
 
 
 @pytest.fixture(params=["device", "standalone-entity"])
@@ -533,6 +638,65 @@ async def test_low_template_events(
     # Nominal levels follow the direction of the battery low change
     assert _levels(battery_events) == [(0, 100), (100, 0), (100, 0)]
     assert hass.states.get(battery_low_id).state == STATE_OFF
+
+
+@pytest.fixture(params=[False, True], ids=["default", "retain-state"])
+def state_template_note_entry(
+    hass: HomeAssistant,
+    mock_config_entry: MockConfigEntry,
+    mock_battery_note_subentry: ConfigSubentry,
+    request: pytest.FixtureRequest,
+) -> MockConfigEntry:
+    """Create a note whose low template passes through a source state."""
+    hass.states.async_set("binary_sensor.door_battery_low", STATE_OFF)
+    subentry = replace(
+        mock_battery_note_subentry,
+        data=MappingProxyType(
+            {
+                **mock_battery_note_subentry.data,
+                CONF_ADVANCED_SETTINGS: {
+                    CONF_BATTERY_LOW_TEMPLATE: "{{ states('binary_sensor.door_battery_low') }}",
+                    CONF_RETAIN_STATE: request.param,
+                },
+            }
+        ),
+    )
+    return _note_entry(mock_config_entry, subentry)
+
+
+@pytest.mark.parametrize("battery_note_source", ["device"])
+async def test_low_template_unavailable_source(
+    hass: HomeAssistant,
+    state_template_note_entry: MockConfigEntry,
+    battery_events: list[Event],
+    freezer: FrozenDateTimeFactory,
+) -> None:
+    """Test an unavailable template source is not reported as not low."""
+    entry = state_template_note_entry
+    await setup_integration(hass, entry)
+    battery_low_id = _battery_low_entity_id(hass, entry)
+    coordinator = next(iter(entry.runtime_data.subentry_coordinators.values()))
+    retain_state = coordinator.retain_state
+
+    hass.states.async_set("binary_sensor.door_battery_low", STATE_ON)
+    await hass.async_block_till_done()
+    assert _summary(battery_events) == [(EVENT_BATTERY_THRESHOLD, True)]
+    last_reported = coordinator.last_reported
+
+    freezer.tick(timedelta(hours=1))
+    hass.states.async_set("binary_sensor.door_battery_low", STATE_UNAVAILABLE)
+    await hass.async_block_till_done()
+    assert len(battery_events) == 1
+    assert coordinator.last_reported == last_reported
+    assert hass.states.get(battery_low_id).state == (
+        STATE_ON if retain_state else STATE_UNAVAILABLE
+    )
+
+    # Coming back still low is not a new threshold crossing
+    hass.states.async_set("binary_sensor.door_battery_low", STATE_ON)
+    await hass.async_block_till_done()
+    assert len(battery_events) == 1
+    assert hass.states.get(battery_low_id).state == STATE_ON
 
 
 @pytest.fixture
