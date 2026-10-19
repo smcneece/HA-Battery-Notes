@@ -97,6 +97,26 @@ Be aware that Home Assistant shows friendly alternatives for some sensors, so wh
 
 Once you have got your template correct you can copy/paste it into the battery notes configuration section for that device and it will use that for detecting the battery is low and raising the battery notes event.
 
+## How do I create a battery percentage that decreases over time?
+
+This one is useful for a (fake device)[https://github.com/andrew-codechimp/HA-Fake-Devices] that does not have a battery percentage.
+
+You can use the battery last replaced date as a calculation point to create a percentage that decreases over time, resetting when you press the Battery Replaced button.
+
+Once you have added a battery note to the device, look up its Battery last replaced sensor entity id and replace it in the template, then add the template to the battery percentage template in additional settings.
+
+The example uses 180 days, but change that to what you want.
+
+```
+{% set replaced = as_datetime(states('sensor.YOUR_SENSOR_battery_last_replaced'), none) %}
+{% if replaced is not none %}
+  {% set days = (now().date() - replaced.date()).days %}
+  {{ ([0, ([100, 100 * (1 - days / 180)] | min)] | max) | round(1) }}
+{% else %}
+  {{ none }}
+{% endif %}
+```
+
 ## My Shelly device is not showing a Battery+?
 
 Some sleeping Shelly devices register their battery sensor without a unit of measurement. Battery Notes also checks the sensor's current state for a percentage unit when the registry unit is missing. If the device has not reported yet, wake it and reload Battery Notes after the original battery sensor shows a percentage.
