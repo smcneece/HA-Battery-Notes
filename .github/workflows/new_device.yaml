@@ -8,6 +8,16 @@ jobs:
   create-device-pull-request:
     if: ${{ contains(github.event.issue.labels.*.name, 'new-device') }}
     runs-on: ubuntu-latest
+    # Declare variables populated by the Python step for workflow validation.
+    env:
+      BRANCH: ""
+      MANUFACTURER: ""
+      MODEL: ""
+      MODEL_ID: ""
+      BQT: ""
+      MODE: ""
+      TITLE_MODE: ""
+      MANUAL: ""
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -22,10 +32,10 @@ jobs:
       - name: Install jq
         run: sudo apt install jq
 
-      - name: Set up python 3.12
-        uses: actions/setup-python@v7
+      - name: Set up Python
+        uses: astral-sh/setup-uv@v10.3.3
         with:
-          python-version: "3.12"
+          activate-environment: true
 
       - name: Update JSON file
         id: update-json
