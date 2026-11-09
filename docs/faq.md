@@ -99,7 +99,7 @@ Once you have got your template correct you can copy/paste it into the battery n
 
 ## How do I create a battery percentage that decreases over time?
 
-This one is useful for a (fake device)[https://github.com/andrew-codechimp/HA-Fake-Devices] that does not have a battery percentage.
+This one is useful for a [fake device](https://github.com/andrew-codechimp/HA-Fake-Devices) that does not have a battery percentage.
 
 You can use the battery last replaced date as a calculation point to create a percentage that decreases over time, resetting when you press the Battery Replaced button.
 
@@ -150,6 +150,13 @@ A Battery Note no longer has entities itself, but you can still see all the enti
 ## Why do I have a battery_notes section in my configuration.yaml?
 
 This was required prior to version 3, you can safely remove it and and any configuration details within it.  Once you have removed it and saved your configuration ensure you go into developer tools and check your configuration before restarting Home Assistant.
+
+## How do I install pre-release versions via Marketplace?
+
+Within Home Assistant go to Settings -> Marketplace
+Open Battery Notes integration details page
+Using the 3 dots menu, select Include pre-releases
+Marketplace will now prompt to install a newer version if a pre-release is available
 
 ## How do I install pre-release versions via HACS?
 
